@@ -1,9 +1,11 @@
+import 'dotenv/config'
 import { Connection, Keypair, PublicKey } from "@solana/web3.js"
 import { Program, Wallet, AnchorProvider } from "@coral-xyz/anchor"
 import { IDL, Turbin3Prereq } from "./programs/Turbin3_prereq";
-import wallet from "./Turbin3-wallet.json"
+import { bs58 } from "@coral-xyz/anchor/dist/cjs/utils/bytes";
 
-const keypair = Keypair.fromSecretKey(new Uint8Array(wallet));
+
+const keypair = Keypair.fromSecretKey(bs58.decode(process.env.PRIVATE_KEY!));
 const connection = new Connection("https://api.devnet.solana.com");
 const github = Buffer.from("nandeeswarbadugu", "utf8");
 
